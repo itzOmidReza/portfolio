@@ -1,0 +1,9 @@
+{
+  "name": "TODO_Person Name",
+  "role": "TODO_Their role/company",
+  "avatar": "https://placehold.co/200x200?text=TODO",
+  "quote": {
+    "fa": "TODO_نقل‌قول فارسی واقعی این شخص را اینجا بگذار",
+    "en": "TODO_Put this person's real English quote here"
+  }
+}

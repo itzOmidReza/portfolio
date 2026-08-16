@@ -1,0 +1,13 @@
+{
+  "title": "TODO_PROJECT_NAME",
+  "description": {
+    "fa": "TODO_توضیحات فارسی پروژه را اینجا بنویس",
+    "en": "TODO_Write the English project description here"
+  },
+  "images": ["https://placehold.co/1600x900?text=TODO+Screenshot"],
+  "tech": ["TODO_Tech1", "TODO_Tech2"],
+  "category": "TODO_Category",
+  "link": "https://example.com/TODO",
+  "featured": false,
+  "order": 2
+}

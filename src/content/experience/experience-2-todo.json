@@ -1,0 +1,16 @@
+{
+  "company": "TODO_COMPANY_NAME",
+  "role": {
+    "fa": "TODO_عنوان شغلی فارسی",
+    "en": "TODO_Job title in English"
+  },
+  "period": "TODO_2022 - 2023",
+  "startDate": "2022-01-01",
+  "endDate": "2023-01-01",
+  "type": "contract",
+  "description": {
+    "fa": "TODO_توضیحات فارسی این تجربه‌ی کاری",
+    "en": "TODO_English description of this work experience"
+  },
+  "skills": ["TODO_Skill1", "TODO_Skill2"]
+}
