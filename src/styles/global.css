@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #0a1f44;
+  --color-accent: #2563eb;
+  --color-accent-light: #60a5fa;
+  --color-bg: #f5f7fa;
+  --color-dark: #0f172a;
+  --color-text-primary: #101828;
+  --color-text-muted: #64748b;
+  --color-chip: #e2e8f0;
+
+  /* Fonts */
+  --font-heading: "Space Grotesk Variable", "Sora", sans-serif;
+  --font-body: "Inter Variable", "IBM Plex Sans", sans-serif;
+  --font-fa: "Vazirmatn Variable", sans-serif;
+
+  /* Radius */
+  --radius-card: 16px;
+  --radius-pill: 999px;
+
+  /* Spacing (اضافه بر اسکیل پیش‌فرض Tailwind) */
+  --spacing-section: 96px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-fa);
+}
