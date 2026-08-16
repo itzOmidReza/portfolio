@@ -1,6 +1,7 @@
 ---
 // src/components/ProjectCard.astro
 import type { CollectionEntry } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 interface Props {
@@ -11,10 +12,12 @@ const { project } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { title, description, images, tech, link, featured } = project.data;
+const { title, description, images, tech, featured } = project.data;
+const detailHref = getRelativeLocaleUrl(lang, `/projects/${project.id}`);
 ---
 
-<article
+<a
+  href={detailHref}
   class="group relative flex h-full flex-col overflow-hidden rounded-(--radius-card) bg-dark shadow-lg ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-1"
 >
   <div class="relative aspect-[16/10] overflow-hidden">
@@ -55,13 +58,8 @@ const { title, description, images, tech, link, featured } = project.data;
       }
     </ul>
 
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-light transition-colors hover:text-white"
-    >
-      {t("projects.cta.view")}
+    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-light transition-colors group-hover:text-white">
+      {t("projects.cta.details")}
       <svg
         class="h-4 w-4 rtl:rotate-180"
         viewBox="0 0 24 24"
@@ -73,6 +71,6 @@ const { title, description, images, tech, link, featured } = project.data;
       >
         <path d="M5 12h14M13 5l7 7-7 7" />
       </svg>
-    </a>
+    </span>
   </div>
-</article>
+</a>

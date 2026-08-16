@@ -17,18 +17,19 @@ const navItems = [
 
 const otherLang = lang === "en" ? "fa" : "en";
 const switchHref = getRelativeLocaleUrl(otherLang, "/");
+const homeHref = getRelativeLocaleUrl(lang, "/");
 ---
 
 <header class="sticky top-0 z-50 bg-bg/80 backdrop-blur-sm">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-    <a href={getRelativeLocaleUrl(lang, "/")} class="font-heading text-lg font-bold text-primary">
+    <a href={homeHref} class="font-heading text-lg font-bold text-primary">
       OmidReza
     </a>
 
     <nav class="hidden gap-6 md:flex">
       {navItems.map((item) => (
         <a
-          href={item.anchor}
+          href={`${homeHref}${item.anchor}`}
           class="text-sm text-text-muted transition-colors hover:text-accent"
         >
           {t(item.key)}
