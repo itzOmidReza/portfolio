@@ -1,0 +1,16 @@
+{
+  "title": "DevFlow",
+  "description": {
+    "fa": "یک پلتفرم مدرن مدیریت پروژه با احراز هویت، بردهای کانبان، تخصیص وظایف و به‌روزرسانی بلادرنگ. با بک‌اند مقیاس‌پذیر NestJS و فرانت‌اند Nuxt ساخته شده.",
+    "en": "A modern project management platform with authentication, Kanban boards, task assignments, and real-time updates. Built using a scalable NestJS backend and Nuxt frontend."
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80",
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80"
+  ],
+  "tech": ["Nuxt.js", "NestJS", "TypeScript", "PostgreSQL", "Tailwind CSS"],
+  "category": "Full-Stack",
+  "link": "https://github.com/itzOmidReza/devflow",
+  "featured": true,
+  "order": 1
+}

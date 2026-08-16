@@ -1,0 +1,39 @@
+---
+// src/components/StatsBar.astro
+import { getCollection } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const projects = await getCollection("projects");
+const experience = await getCollection("experience");
+
+// قدیمی‌ترین startDate بین تجربه‌ها = نقطه‌ی شروع مسیر کاری
+const earliestStart = experience.reduce((earliest, exp) => {
+  return exp.data.startDate < earliest ? exp.data.startDate : earliest;
+}, new Date());
+
+const yearsExperience = Math.max(
+  1,
+  new Date().getFullYear() - earliestStart.getFullYear()
+);
+
+const stats = [
+  { value: `${yearsExperience}+`, label: t("stats.experience") },
+  { value: `${projects.length}+`, label: t("stats.projects") },
+];
+---
+
+<section class="border-y border-chip bg-white">
+  <div class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-10 md:grid-cols-4">
+    {stats.map((stat) => (
+      <div class="text-center">
+        <p class="font-heading text-3xl font-bold text-primary md:text-4xl">
+          {stat.value}
+        </p>
+        <p class="mt-1 text-sm text-text-muted">{stat.label}</p>
+      </div>
+    ))}
+  </div>
+</section>

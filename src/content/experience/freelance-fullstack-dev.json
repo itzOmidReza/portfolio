@@ -1,0 +1,15 @@
+{
+  "company": "Freelance / Self-Employed",
+  "role": {
+    "fa": "توسعه‌دهنده‌ی فول‌استک وب",
+    "en": "Full-Stack Web Developer"
+  },
+  "period": "2024 - Present",
+  "startDate": "2024-01-01",
+  "type": "freelance",
+  "description": {
+    "fa": "ساخت اپلیکیشن‌های وب مدرن با یک تیم کوچک از توسعه‌دهنده‌ها، با تمرکز روی داشبوردهای مدیریتی و وب‌سایت‌های شرکتی. کار در تمام لایه‌های استک با Vue.js، Nuxt.js، TypeScript و NestJS، با تاکید بر معماری تمیز، دسترسی‌پذیری و تحویل آماده‌ی تولید.",
+    "en": "Building modern web applications with a small team of developers, focusing on admin dashboards and corporate websites. Working across the full stack with Vue.js, Nuxt.js, TypeScript, and NestJS, with an emphasis on clean architecture, accessibility, and production-ready delivery."
+  },
+  "skills": ["Vue.js", "Nuxt.js", "TypeScript", "NestJS", "Tailwind CSS"]
+}

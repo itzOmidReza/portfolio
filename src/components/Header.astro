@@ -1,0 +1,47 @@
+---
+// src/components/Header.astro
+import { getLangFromUrl, useTranslations, useTranslatedPath } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+  { key: "nav.home", anchor: "#home" },
+  { key: "nav.about", anchor: "#about" },
+  { key: "nav.skills", anchor: "#skills" },
+  { key: "nav.projects", anchor: "#projects" },
+  { key: "nav.experience", anchor: "#experience" },
+  { key: "nav.contact", anchor: "#contact" },
+] as const;
+
+const otherLang = lang === "en" ? "fa" : "en";
+const switchHref = getRelativeLocaleUrl(otherLang, "/");
+---
+
+<header class="sticky top-0 z-50 bg-bg/80 backdrop-blur-sm">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+    <a href={getRelativeLocaleUrl(lang, "/")} class="font-heading text-lg font-bold text-primary">
+      OmidReza
+    </a>
+
+    <nav class="hidden gap-6 md:flex">
+      {navItems.map((item) => (
+        <a
+          href={item.anchor}
+          class="text-sm text-text-muted transition-colors hover:text-accent"
+        >
+          {t(item.key)}
+        </a>
+      ))}
+    </nav>
+
+    <a
+    
+      href={switchHref}
+      class="rounded-(--radius-pill) border border-accent px-4 py-1.5 text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-white"
+    >
+      {otherLang === "fa" ? "فا" : "EN"}
+    </a>
+  </div>
+</header>

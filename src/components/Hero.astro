@@ -1,0 +1,78 @@
+---
+// src/components/Hero.astro
+import { Image } from "astro:assets";
+import heroImage from "../assets/hero.png";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { site } from "../i18n/site";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="home" class="relative overflow-hidden py-(--spacing-section)">
+  <!-- دکوراسیون نقطه‌چین پس‌زمینه -->
+  <svg
+    class="pointer-events-none absolute -top-10 end-0 h-64 w-64 text-accent-light/40"
+    viewBox="0 0 200 200"
+    fill="none"
+  >
+    <pattern id="dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="2" fill="currentColor" />
+    </pattern>
+    <rect width="200" height="200" fill="url(#dots)" />
+  </svg>
+
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 md:grid-cols-2">
+    <!-- متن -->
+    <div class="text-start">
+      <span
+        class="inline-flex items-center gap-2 rounded-(--radius-pill) bg-chip px-4 py-1.5 text-sm text-text-muted"
+      >
+        <span class="h-2 w-2 rounded-full bg-accent"></span>
+        {t("hero.available")}
+      </span>
+
+      <h1 class="mt-6 font-heading text-4xl font-bold text-primary md:text-5xl">
+        {site.name}
+      </h1>
+      <p class="mt-2 text-xl text-accent">{site.role[lang]}</p>
+      <p class="mt-4 max-w-md text-text-muted">{site.tagline[lang]}</p>
+
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a
+        
+          href="#projects"
+          class="rounded-(--radius-pill) bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary"
+        >
+          {t("hero.cta.work")}
+        </a>
+        
+        <a
+          href="/OmidRezaCV.pdf"
+          class="rounded-(--radius-pill) border border-primary px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-white"
+        >
+          {t("hero.cta.cv")}
+        </a>
+      </div>
+    </div>
+
+    <!-- عکس در بلاب -->
+    <div class="relative mx-auto aspect-square w-full max-w-sm">
+      <div
+        class="absolute inset-0 rounded-[40%_60%_60%_40%/60%_40%_60%_40%] bg-gradient-to-br from-accent to-accent-light blur-2xl opacity-30"
+      >
+      </div>
+      <div
+        class="relative h-full w-full overflow-hidden rounded-[40%_60%_60%_40%/60%_40%_60%_40%] border-4 border-white shadow-xl"
+      >
+        <Image
+          src={heroImage}
+          alt={site.name}
+          width={480}
+          height={480}
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</section>
