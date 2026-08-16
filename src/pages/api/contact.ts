@@ -51,7 +51,7 @@ export const POST: APIRoute = async ({ request }) => {
     const { error } = await resend.emails.send({
       // تا وقتی دامنه‌ی itzomidreza.ir رو در Resend وریفای نکردی، فقط از آدرس تست resend.dev می‌تونی بفرستی
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: site.contact.email,
+      to: site.contact.email.toLowerCase(),
       replyTo: email,
       subject: `New portfolio message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
