@@ -42,7 +42,10 @@ export const ui = {
     "experience.type.contract": "قراردادی",
     "experience.type.education": "تحصیلی",
     "contact.success": "پیام شما با موفقیت ارسال شد!",
-"contact.error": "مشکلی پیش اومد. لطفاً دوباره تلاش کن.",
+    "contact.error": "مشکلی پیش اومد. لطفاً دوباره تلاش کن.",
+    "project.back": "بازگشت به پروژه‌ها",
+    "projects.cta.details": "مشاهده جزئیات",
+
   },
   en: {
     "nav.home": "Home",
@@ -80,6 +83,8 @@ export const ui = {
     "experience.type.contract": "Contract",
     "experience.type.education": "Education",
     "contact.success": "Your message has been sent!",
-"contact.error": "Something went wrong. Please try again.",
+    "contact.error": "Something went wrong. Please try again.",
+    "project.back": "Back to Projects",
+    "projects.cta.details": "View Details",
   },
 } as const;
