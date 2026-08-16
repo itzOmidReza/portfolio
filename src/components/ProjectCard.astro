@@ -1,0 +1,78 @@
+---
+// src/components/ProjectCard.astro
+import type { CollectionEntry } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { title, description, images, tech, link, featured } = project.data;
+---
+
+<article
+  class="group relative flex h-full flex-col overflow-hidden rounded-(--radius-card) bg-dark shadow-lg ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-1"
+>
+  <div class="relative aspect-[16/10] overflow-hidden">
+    <img
+      src={images[0]}
+      alt={title}
+      loading="lazy"
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+    <!-- overlay آبی طبق design-system: gradient از accent به primary -->
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-accent/85 via-primary/25 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90"
+    >
+    </div>
+
+    {
+      featured && (
+        <span class="absolute top-4 start-4 rounded-(--radius-pill) bg-accent px-3 py-1 text-xs font-semibold text-white shadow-md">
+          {t("projects.featured")}
+        </span>
+      )
+    }
+  </div>
+
+  <div class="flex flex-1 flex-col p-6">
+    <h3 class="font-heading text-xl font-semibold text-white">{title}</h3>
+    <p class="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-white/70">
+      {description[lang]}
+    </p>
+
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {
+        tech.map((item) => (
+          <li class="rounded-(--radius-pill) bg-white/10 px-3 py-1 text-xs font-medium text-white/90">
+            {item}
+          </li>
+        ))
+      }
+    </ul>
+
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-light transition-colors hover:text-white"
+    >
+      {t("projects.cta.view")}
+      <svg
+        class="h-4 w-4 rtl:rotate-180"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M5 12h14M13 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</article>

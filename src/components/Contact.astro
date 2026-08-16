@@ -1,0 +1,172 @@
+---
+// src/components/Contact.astro
+import { Icon } from "astro-icon/components";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { site } from "../i18n/site";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="contact" class="bg-white py-(--spacing-section)">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-center font-heading text-3xl font-bold text-primary md:text-4xl">
+      {t("section.contact")}
+    </h2>
+
+    <div class="mt-12 grid overflow-hidden rounded-(--radius-card) shadow-lg md:grid-cols-2">
+      <!-- فرم روشن -->
+      <form id="contact-form" class="space-y-5 bg-white p-8 md:p-10">
+        <div>
+          <label for="name" class="mb-1.5 block text-sm font-medium text-text-primary">
+            {t("contact.name")}
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            class="w-full rounded-(--radius-card) border border-chip bg-bg px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="mb-1.5 block text-sm font-medium text-text-primary">
+            {t("contact.email")}
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            class="w-full rounded-(--radius-card) border border-chip bg-bg px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="mb-1.5 block text-sm font-medium text-text-primary">
+            {t("contact.message")}
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+            class="w-full resize-none rounded-(--radius-card) border border-chip bg-bg px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full rounded-(--radius-pill) bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {t("contact.send")}
+        </button>
+
+        <p class="hidden text-sm text-accent" data-form-success>
+          {t("contact.success")}
+        </p>
+        <p class="hidden text-sm text-red-500" data-form-error>
+          {t("contact.error")}
+        </p>
+      </form>
+
+      <!-- بلوک تماس تیره -->
+      <div class="flex flex-col justify-center gap-6 bg-dark p-8 text-white md:p-10">
+        <p class="text-sm leading-relaxed text-white/70">
+          {site.bio.short[lang]}
+        </p>
+
+        <a
+          href={`mailto:${site.contact.email}`}
+          class="flex items-center gap-3 text-sm transition-colors hover:text-accent-light"
+        >
+          <svg
+            class="h-5 w-5 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-10 6L2 7" />
+          </svg>
+          {site.contact.email}
+        </a>
+
+        <div class="flex items-center gap-4 pt-2">
+          <a
+            href={site.contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="text-white/70 transition-colors hover:text-accent-light"
+          >
+            <Icon name="simple-icons:github" class="h-6 w-6" />
+          </a>
+          <a
+            href={site.contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="text-white/70 transition-colors hover:text-accent-light"
+          >
+            <Icon name="simple-icons:linkedin" class="h-6 w-6" />
+          </a>
+          <a
+            href={site.contact.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Telegram"
+            class="text-white/70 transition-colors hover:text-accent-light"
+          >
+            <Icon name="simple-icons:telegram" class="h-6 w-6" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initContactForm() {
+    const form = document.querySelector<HTMLFormElement>("#contact-form");
+    if (!form) return;
+
+    const success = form.querySelector<HTMLElement>("[data-form-success]");
+    const error = form.querySelector<HTMLElement>("[data-form-error]");
+    const submitBtn = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]'
+    );
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      success?.classList.add("hidden");
+      error?.classList.add("hidden");
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(Object.fromEntries(formData)),
+        });
+
+        if (!res.ok) throw new Error("Request failed");
+
+        form.reset();
+        success?.classList.remove("hidden");
+      } catch {
+        error?.classList.remove("hidden");
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+
+  initContactForm();
+  document.addEventListener("astro:page-load", initContactForm);
+</script>

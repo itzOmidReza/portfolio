@@ -1,0 +1,106 @@
+---
+// src/components/Projects.astro
+import { getCollection } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import ProjectCard from "./ProjectCard.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const projects = (
+  await getCollection("projects", ({ data }) => !data.title.startsWith("TODO_"))
+).sort((a, b) => a.data.order - b.data.order);
+
+const categories = Array.from(new Set(projects.map((p) => p.data.category)));
+---
+
+<section id="projects" class="bg-white py-(--spacing-section)">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-center font-heading text-3xl font-bold text-primary md:text-4xl">
+      {t("section.projects")}
+    </h2>
+
+    {
+      categories.length > 1 && (
+        <div class="mt-8 flex flex-wrap justify-center gap-3" data-filter-group>
+          <button
+            type="button"
+            data-filter="all"
+            class="rounded-(--radius-pill) bg-accent px-5 py-2 text-sm font-medium text-white transition-colors"
+          >
+            {t("projects.filter.all")}
+          </button>
+          {categories.map((cat) => (
+            <button
+              type="button"
+              data-filter={cat}
+              class="rounded-(--radius-pill) bg-chip px-5 py-2 text-sm font-medium text-text-primary transition-colors hover:bg-accent hover:text-white"
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      )
+    }
+
+    <div
+      class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+      data-project-grid
+    >
+      {
+        projects.map((project) => (
+          <div data-project-item data-category={project.data.category}>
+            <ProjectCard project={project} />
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="mt-10 hidden text-center text-sm text-text-muted" data-empty-state>
+      {t("projects.empty")}
+    </p>
+  </div>
+</section>
+
+<script>
+  function initProjectFilter() {
+    const group = document.querySelector<HTMLElement>("[data-filter-group]");
+    const grid = document.querySelector<HTMLElement>("[data-project-grid]");
+    const empty = document.querySelector<HTMLElement>("[data-empty-state]");
+    if (!group || !grid) return;
+
+    const setActive = (activeBtn: HTMLElement) => {
+      group.querySelectorAll<HTMLElement>("[data-filter]").forEach((btn) => {
+        btn.classList.remove("bg-accent", "text-white");
+        btn.classList.add("bg-chip", "text-text-primary");
+      });
+      activeBtn.classList.remove("bg-chip", "text-text-primary");
+      activeBtn.classList.add("bg-accent", "text-white");
+    };
+
+    group.addEventListener("click", (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLElement>(
+        "[data-filter]"
+      );
+      if (!button) return;
+
+      setActive(button);
+
+      const filter = button.getAttribute("data-filter");
+      const items = grid.querySelectorAll<HTMLElement>("[data-project-item]");
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const category = item.getAttribute("data-category");
+        const show = filter === "all" || category === filter;
+        item.classList.toggle("hidden", !show);
+        if (show) visibleCount++;
+      });
+
+      empty?.classList.toggle("hidden", visibleCount > 0);
+    });
+  }
+
+  initProjectFilter();
+  document.addEventListener("astro:page-load", initProjectFilter);
+</script>
