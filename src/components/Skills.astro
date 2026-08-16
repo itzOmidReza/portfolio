@@ -1,0 +1,68 @@
+---
+// src/components/Skills.astro
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allSkills = await getCollection(
+  "skills",
+  ({ data }) => !data.icon.startsWith("TODO_")
+);
+
+const categories = ["frontend", "backend", "data-ai", "tools"] as const;
+
+const grouped = categories
+  .map((cat) => ({
+    key: cat,
+    label: t(`skills.category.${cat}` as Parameters<typeof t>[0]),
+    items: allSkills.filter((s) => s.data.category === cat),
+  }))
+  .filter((group) => group.items.length > 0);
+---
+
+<section id="skills" class="bg-white py-(--spacing-section)">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-center font-heading text-3xl font-bold text-primary md:text-4xl">
+      {t("section.skills")}
+    </h2>
+
+    <div class="mt-12 grid gap-10 md:grid-cols-2">
+      {grouped.map((group) => (
+        <div>
+          <h3 class="mb-4 font-heading text-lg font-semibold text-primary">
+            {group.label}
+          </h3>
+
+          <div class="space-y-5">
+            {group.items.map((skill) => (
+              <div>
+                <div class="mb-1.5 flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <Icon name={`simple-icons:${skill.data.icon}`} class="h-4 w-4 text-accent" />
+                    <span class="text-sm font-medium text-text-primary">
+                      {skill.data.name}
+                    </span>
+                  </div>
+                  {skill.data.level && (
+                    <span class="text-xs text-text-muted">{skill.data.level}%</span>
+                  )}
+                </div>
+
+                <div class="h-2 w-full overflow-hidden rounded-(--radius-pill) bg-chip">
+                  <div
+                    class="h-full rounded-(--radius-pill) bg-accent"
+                    style={`width: ${skill.data.level ?? 0}%`}
+                  >
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

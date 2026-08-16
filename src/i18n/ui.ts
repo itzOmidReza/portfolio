@@ -2,9 +2,9 @@ export const languages = {
   fa: "فارسی",
   en: "English",
 };
- 
+
 export const defaultLang = "en";
- 
+
 export const ui = {
   fa: {
     "nav.home": "خانه",
@@ -29,6 +29,11 @@ export const ui = {
     "contact.message": "پیام شما",
     "contact.send": "ارسال پیام",
     "footer.rights": "تمامی حقوق محفوظ است.",
+    "section.about": "درباره من",
+    "skills.category.frontend": "فرانت‌اند",
+    "skills.category.backend": "بک‌اند",
+    "skills.category.data-ai": "داده و هوش مصنوعی",
+    "skills.category.tools": "ابزارها",
   },
   en: {
     "nav.home": "Home",
@@ -53,5 +58,10 @@ export const ui = {
     "contact.message": "Your Message",
     "contact.send": "Send Message",
     "footer.rights": "All rights reserved.",
+    "section.about": "About Me",
+    "skills.category.frontend": "Frontend",
+    "skills.category.backend": "Backend",
+    "skills.category.data-ai": "Data & AI",
+    "skills.category.tools": "Tools",
   },
 } as const;
