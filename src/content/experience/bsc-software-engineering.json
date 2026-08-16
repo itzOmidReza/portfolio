@@ -1,0 +1,21 @@
+{
+  "company": "Islamic Azad University, Kermanshah Branch",
+  "role": {
+    "fa": "دانشجوی کارشناسی مهندسی نرم‌افزار",
+    "en": "B.Sc. Software Engineering Student"
+  },
+  "period": "2022 - Present",
+  "startDate": "2022-01-01",
+  "type": "education",
+  "description": {
+    "fa": "تحصیل در رشته‌ی مهندسی نرم‌افزار با تمرکز بر معماری نرم‌افزار، الگوریتم‌ها، پایگاه‌داده و توسعه‌ی وب. ساخت اپلیکیشن‌های فول‌استک با Vue.js، Nuxt.js و NestJS همراه با یادگیری مبانی یادگیری ماشین و یکپارچه‌سازی ابزارهای هوش مصنوعی.",
+    "en": "Studying software engineering with a focus on software architecture, algorithms, databases, and web development. Building full-stack applications with Vue.js, Nuxt.js, and NestJS while exploring machine learning fundamentals and AI tool integration."
+  },
+  "skills": [
+    "Data Structures",
+    "Algorithms",
+    "Object-Oriented Programming",
+    "Software Design",
+    "Databases"
+  ]
+}

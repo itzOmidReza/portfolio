@@ -1,0 +1,21 @@
+{
+  "company": "Freelance / Self-Employed",
+  "role": {
+    "fa": "مدرس توسعه‌ی وب",
+    "en": "Web Development Instructor"
+  },
+  "period": "2024 - Present",
+  "startDate": "2024-01-01",
+  "type": "freelance",
+  "description": {
+    "fa": "آموزش توسعه‌ی وب مدرن به دانشجویان، پوشش مبانی فرانت‌اند و بک‌اند از طریق تمرین‌های پروژه‌محور واقعی. راهنمایی زبان‌آموزان در زمینه‌ی کد تمیز، گردش‌کار Git و ساخت اپلیکیشن‌های آماده‌ی تولید از صفر.",
+    "en": "Teaching modern web development to students, covering frontend and backend fundamentals through real-world project practices. Mentoring learners on clean code, Git workflows, and building production-ready applications from scratch."
+  },
+  "skills": [
+    "Teaching",
+    "JavaScript",
+    "Vue.js",
+    "Web Development",
+    "Mentoring"
+  ]
+}

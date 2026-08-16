@@ -1,0 +1,22 @@
+{
+  "title": "AI Notes",
+  "description": {
+    "fa": "یک اپلیکیشن هوشمند یادداشت‌برداری مبتنی بر هوش مصنوعی. کاربران می‌توانند یادداشت‌ها را سازمان‌دهی کنند، خلاصه تولید کنند و محتوا را با زبان طبیعی جست‌وجو کنند.",
+    "en": "An intelligent note-taking application powered by AI. Users can organize notes, generate summaries, and search content using natural language."
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80",
+    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80"
+  ],
+  "tech": [
+    "Nuxt.js",
+    "NestJS",
+    "OpenAI API",
+    "MongoDB",
+    "TypeScript"
+  ],
+  "category": "AI",
+  "link": "https://github.com/itzOmidReza/ai-notes",
+  "featured": false,
+  "order": 2
+}

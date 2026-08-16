@@ -1,1 +1,6 @@
-{ "name": "TypeScript", "icon": "typescript", "level": 85, "category": "frontend" }
+{
+  "name": "TypeScript",
+  "icon": "typescript",
+  "level": 95,
+  "category": "frontend"
+}

@@ -1,1 +1,6 @@
-{ "name": "PostgreSQL", "icon": "postgresql", "level": 70, "category": "backend" }
+{
+  "name": "PostgreSQL",
+  "icon": "postgresql",
+  "level": 95,
+  "category": "database"
+}

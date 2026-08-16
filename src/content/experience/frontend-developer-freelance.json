@@ -1,0 +1,22 @@
+{
+  "company": "Various Clients (Freelance)",
+  "role": {
+    "fa": "توسعه‌دهنده‌ی فرانت‌اند",
+    "en": "Frontend Developer"
+  },
+  "period": "2023 - 2024",
+  "startDate": "2023-01-01",
+  "endDate": "2024-12-31",
+  "type": "freelance",
+  "description": {
+    "fa": "ارائه‌ی پروژه‌های فرانت‌اند وب برای سه شرکت به‌صورت قراردادی، ساخت رابط‌های کاربری واکنش‌گرا و همکاری مستقیم با مشتریان برای تعیین دامنه‌ی نیازمندی‌ها.",
+    "en": "Delivered frontend web projects for three companies on a contract basis, building responsive interfaces and working directly with clients to scope requirements."
+  },
+  "skills": [
+    "Vue.js",
+    "JavaScript",
+    "TypeScript",
+    "Tailwind CSS",
+    "Client Communication"
+  ]
+}

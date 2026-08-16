@@ -1,0 +1,21 @@
+{
+  "title": "Portfolio CMS",
+  "description": {
+    "fa": "یک پلتفرم پورتفولیوی قابل‌شخصی‌سازی با داشبورد مدیریت، مدیریت بلاگ، نمایش پروژه‌ها و بهینه‌سازی سئو.",
+    "en": "A customizable portfolio platform featuring an admin dashboard, blog management, project showcase, and SEO optimization."
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80",
+    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=80"
+  ],
+  "tech": [
+    "Nuxt.js",
+    "NestJS",
+    "PostgreSQL",
+    "Tailwind CSS"
+  ],
+  "category": "Published Website",
+  "link": "https://www.omidreza.website",
+  "featured": true,
+  "order": 3
+}

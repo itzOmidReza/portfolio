@@ -1,1 +1,6 @@
-{ "name": "Tailwind CSS", "icon": "tailwindcss", "level": 90, "category": "frontend" }
+{
+  "name": "Tailwind CSS",
+  "icon": "tailwindcss",
+  "level": 95,
+  "category": "frontend"
+}

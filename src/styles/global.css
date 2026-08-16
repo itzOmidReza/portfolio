@@ -33,3 +33,113 @@ body {
 html[dir="rtl"] body {
   font-family: var(--font-fa);
 }
+
+/* =========================================================
+   Animation System — اضافه کن به آخر src/styles/global.css
+   ========================================================= */
+
+/* --- Keyframes --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInStart {
+  /* در RTL از راست، در LTR از چپ میاد تو (منطقی به جهت صفحه) */
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+[dir="rtl"] .reveal-side {
+  animation-name: slideInStart;
+}
+@keyframes slideInStartRTL {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* --- 1) انیمیشن ورود در لحظه‌ی لود صفحه (Hero و هدر) --- */
+.enter-up {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.enter-fade {
+  animation: fadeIn 1s ease-out both;
+}
+.enter-scale {
+  animation: scaleIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* استگر: روی چند تا المان پشت‌سرهم با تاخیر متفاوت */
+.enter-delay-1 { animation-delay: 0.1s; }
+.enter-delay-2 { animation-delay: 0.25s; }
+.enter-delay-3 { animation-delay: 0.4s; }
+.enter-delay-4 { animation-delay: 0.55s; }
+.enter-delay-5 { animation-delay: 0.7s; }
+
+/* --- 2) انیمیشن هنگام اسکرول (Reveal on Scroll) --- */
+/* حالت پیش‌فرض: مخفی و کمی جابه‌جا شده */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-side {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[dir="rtl"] .reveal-side {
+  transform: translateX(32px);
+}
+
+/* وقتی JS کلاس is-visible رو اضافه کرد */
+.reveal.is-visible,
+.reveal-scale.is-visible,
+.reveal-side.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* استگر برای کارت‌ها (مثل کارت‌های Project/Skill) — به هر کارت nth-child بده */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms;   opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 90ms;  opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 180ms; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 270ms; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 360ms; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 450ms; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(n+7) { transition-delay: 540ms; opacity: 1; transform: none; }
+
+/* --- احترام به کاربرهایی که انیمیشن کم می‌خوان --- */
+@media (prefers-reduced-motion: reduce) {
+  .enter-up, .enter-fade, .enter-scale,
+  .reveal, .reveal-scale, .reveal-side,
+  .reveal-stagger > * {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

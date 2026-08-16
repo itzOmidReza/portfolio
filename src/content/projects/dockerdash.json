@@ -1,0 +1,22 @@
+{
+  "title": "DockerDash",
+  "description": {
+    "fa": "یک داشبورد خودمیزبان برای مانیتورینگ و مدیریت کانتینرهای Docker محلی — مشاهده‌ی لاگ‌ها، مصرف منابع و وضعیت کانتینر به‌صورت لحظه‌ای از طریق رابط تمیز Nuxt.",
+    "en": "A self-hosted dashboard for monitoring and managing local Docker containers — view logs, resource usage, and container status in real time through a clean Nuxt interface."
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1600&q=80",
+    "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1600&q=80"
+  ],
+  "tech": [
+    "Docker",
+    "NestJS",
+    "Nuxt.js",
+    "TypeScript",
+    "WebSockets"
+  ],
+  "category": "DevOps",
+  "link": "https://github.com/itzOmidReza/dockerdash",
+  "featured": false,
+  "order": 8
+}

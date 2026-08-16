@@ -1,0 +1,22 @@
+{
+  "company": "University of Applied Science and Technology",
+  "role": {
+    "fa": "کاردانی شبکه‌های کامپیوتری",
+    "en": "Associate Degree, Computer Networks"
+  },
+  "period": "2020 - 2022",
+  "startDate": "2020-01-01",
+  "endDate": "2022-12-31",
+  "type": "education",
+  "description": {
+    "fa": "تحصیل در مبانی شبکه‌های کامپیوتری شامل معماری شبکه، پروتکل‌ها و مدیریت سیستم — پایه‌ای که همچنان در نحوه‌ی نگاه من به معماری بک‌اند و سیستم‌های وب مقیاس‌پذیر امروز تاثیرگذار است.",
+    "en": "Studied computer networking fundamentals including network architecture, protocols, and systems administration — a foundation that continues to inform how I approach backend architecture and scalable web systems today."
+  },
+  "skills": [
+    "Computer Networks",
+    "Networking Fundamentals",
+    "Systems Administration",
+    "Linux",
+    "Troubleshooting"
+  ]
+}

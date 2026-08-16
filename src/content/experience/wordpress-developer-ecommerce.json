@@ -1,0 +1,22 @@
+{
+  "company": "Freelance / Self-Employed",
+  "role": {
+    "fa": "توسعه‌دهنده‌ی وردپرس (فروشگاه آنلاین)",
+    "en": "WordPress Developer (E-commerce)"
+  },
+  "period": "2021 - 2022",
+  "startDate": "2021-01-01",
+  "endDate": "2022-12-31",
+  "type": "freelance",
+  "description": {
+    "fa": "تخصص در ساخت وب‌سایت‌های فروشگاهی با وردپرس و ووکامرس برای مشتریان کسب‌وکارهای کوچک. مدیریت کامل تحویل سایت، از شخصی‌سازی قالب تا راه‌اندازی نهایی، و کسب تجربه‌ی اولیه در ارتباط با مشتری و مدیریت پروژه.",
+    "en": "Specialized in building e-commerce websites using WordPress and WooCommerce for small business clients. Managed end-to-end site delivery, from theme customization to launch, gaining early experience in client communication and project management."
+  },
+  "skills": [
+    "WordPress",
+    "WooCommerce",
+    "HTML",
+    "CSS",
+    "PHP"
+  ]
+}

@@ -28,5 +28,49 @@ const dir = lang === "fa" ? "rtl" : "ltr";
   <body class:list={[lang === "fa" ? "font-vazir" : "font-inter"]}>
      <Header />
     <slot />
+    <!--
+  این بلوک رو داخل src/layouts/Layout.astro، درست قبل از بسته‌شدن </body>
+  اضافه کن (اگه astro:transitions/ClientRouter داری، این اسکریپت با
+  event "astro:page-load" هم دوباره اجرا می‌شه که بعد از ناوبری کار کنه).
+-->
+<script>
+  function initScrollReveal() {
+    const targets = document.querySelectorAll(
+      ".reveal, .reveal-scale, .reveal-side, .reveal-stagger"
+    );
+    if (!targets.length) return;
+
+    // اگه کاربر انیمیشن کم می‌خواد، مستقیم همه رو نشون بده
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) {
+      targets.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target); // فقط یه بار انیمیت بشه
+          }
+        }
+      },
+      {
+        threshold: 0.15, // وقتی ۱۵٪ المان دیده شد
+        rootMargin: "0px 0px -8% 0px",
+      }
+    );
+
+    targets.forEach((el) => observer.observe(el));
+  }
+
+  // اجرای اولیه
+  initScrollReveal();
+  // اگه از View Transitions آسترو استفاده می‌کنی، بعد از هر ناوبری دوباره اجرا بشه
+  document.addEventListener("astro:page-load", initScrollReveal);
+</script>
   </body>
 </html>

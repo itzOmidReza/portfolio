@@ -62,4 +62,19 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/omidrezashahbazi/",
     github: "https://github.com/itzOmidReza",
   },
+  // مسیر رزومه‌ی PDF — فایل واقعی رو توی public/OmidRezaCV.pdf قرار بده
+  resumeUrl: "/OmidRezaCV.pdf",
+  // آیکون‌های شبکه‌ی اجتماعی برای Footer/Contact — url خالی = آیکون مخفی
+  socials: [
+    { name: "GitHub", url: "https://github.com/itzOmidReza", icon: "mdi:github", showInContact: true },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/omidrezashahbazi/", icon: "mdi:linkedin", showInContact: true },
+    { name: "Leetcode", url: "", icon: "devicon-plain:leetcode", showInContact: false },
+    { name: "Behance", url: "", icon: "devicon-plain:behance", showInContact: false },
+    { name: "Email", url: "mailto:itzOmidReza@gmail.com", icon: "mdi:email", showInContact: true },
+    { name: "Telegram", url: "https://t.me/itzOmidReza", icon: "mdi:telegram", showInContact: true },
+    { name: "Whatsapp", url: "", icon: "mdi:whatsapp", showInContact: false },
+    { name: "Facebook", url: "", icon: "mdi:facebook", showInContact: false },
+    { name: "Messenger", url: "", icon: "mdi:facebook-messenger", showInContact: false },
+    { name: "Instagram", url: "", icon: "mdi:instagram", showInContact: false },
+  ],
 } as const;

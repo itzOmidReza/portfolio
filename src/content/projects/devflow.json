@@ -8,7 +8,13 @@
     "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80",
     "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80"
   ],
-  "tech": ["Nuxt.js", "NestJS", "TypeScript", "PostgreSQL", "Tailwind CSS"],
+  "tech": [
+    "Nuxt.js",
+    "NestJS",
+    "TypeScript",
+    "PostgreSQL",
+    "Tailwind CSS"
+  ],
   "category": "Full-Stack",
   "link": "https://github.com/itzOmidReza/devflow",
   "featured": true,

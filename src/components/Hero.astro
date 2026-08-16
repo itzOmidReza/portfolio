@@ -32,13 +32,13 @@ const t = useTranslations(lang);
         {t("hero.available")}
       </span>
 
-      <h1 class="mt-6 font-heading text-4xl font-bold text-primary md:text-5xl">
+      <h1 class="mt-6 font-heading text-4xl font-bold text-primary md:text-5xl enter-up">
         {site.name}
       </h1>
-      <p class="mt-2 text-xl text-accent">{site.role[lang]}</p>
-      <p class="mt-4 max-w-md text-text-muted">{site.tagline[lang]}</p>
+      <p class="mt-2 text-xl text-accent enter-up enter-delay-1">{site.role[lang]}</p>
+      <p class="mt-4 max-w-md text-text-muted enter-up enter-delay-1">{site.tagline[lang]}</p>
 
-      <div class="mt-8 flex flex-wrap gap-4">
+      <div class="mt-8 flex flex-wrap gap-4 enter-up enter-delay-2">
         <a
         
           href="#projects"
@@ -70,7 +70,7 @@ const t = useTranslations(lang);
           alt={site.name}
           width={480}
           height={480}
-          class="h-full w-full object-cover"
+          class="h-full w-full object-cover enter-scale enter-delay-1"
         />
       </div>
     </div>

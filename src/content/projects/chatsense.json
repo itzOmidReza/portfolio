@@ -1,0 +1,21 @@
+{
+  "title": "ChatSense",
+  "description": {
+    "fa": "یک ابزار سبک تحلیل احساسات و تشخیص قصد ساخته‌شده با پایتون، ارائه‌ی یک API ساده که متن ورودی را دسته‌بندی می‌کند — طراحی‌شده به‌عنوان پایه‌ای برای قابلیت‌های هوشمندتر چت‌بات و تیکت پشتیبانی.",
+    "en": "A lightweight sentiment and intent analysis tool built with Python, exposing a simple API that classifies text input — designed as a foundation for smarter chatbot and support-ticket features."
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80",
+    "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&q=80"
+  ],
+  "tech": [
+    "Python",
+    "scikit-learn",
+    "FastAPI",
+    "Docker"
+  ],
+  "category": "AI",
+  "link": "https://github.com/itzOmidReza/chatsense",
+  "featured": false,
+  "order": 9
+}

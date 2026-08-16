@@ -1,0 +1,22 @@
+{
+  "title": "ShopSphere",
+  "description": {
+    "fa": "یک پلتفرم فروشگاه آنلاین مدرن با مدیریت محصولات، سبد خرید، احراز هویت امن، یکپارچه‌سازی پرداخت و داشبورد مدیریت.",
+    "en": "A modern e-commerce platform with product management, shopping cart, secure authentication, payment integration, and an admin dashboard."
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80",
+    "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1600&q=80"
+  ],
+  "tech": [
+    "Nuxt.js",
+    "NestJS",
+    "TypeScript",
+    "PostgreSQL",
+    "Stripe"
+  ],
+  "category": "Personal Project",
+  "link": "https://github.com/itzOmidReza/shopsphere",
+  "featured": true,
+  "order": 4
+}

@@ -50,7 +50,7 @@ const skills = defineCollection({
     name: z.string(),
     icon: z.string(),
     level: z.number().min(0).max(100).optional(),
-    category: z.enum(["frontend", "backend", "data-ai", "tools"]),
+    category: z.enum(["frontend", "backend", "database", "data-ai", "tools"]),
   }),
 });
 

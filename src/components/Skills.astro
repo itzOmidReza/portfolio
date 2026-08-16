@@ -1,65 +1,155 @@
 ---
-// src/components/Skills.astro
-import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { Icon } from "astro-icon/components";
+import { ui, defaultLang } from "../i18n/ui";
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = (Astro.currentLocale as keyof typeof ui) ?? defaultLang;
+const t = ui[lang];
 
-const allSkills = await getCollection(
-  "skills",
-  ({ data }) => !data.icon.startsWith("TODO_")
-);
+const allSkills = await getCollection("skills");
 
-const categories = ["frontend", "backend", "data-ai", "tools"] as const;
+const CATEGORY_ORDER = ["frontend", "backend", "database", "data-ai", "tools"] as const;
 
-const grouped = categories
-  .map((cat) => ({
-    key: cat,
-    label: t(`skills.category.${cat}` as Parameters<typeof t>[0]),
-    items: allSkills.filter((s) => s.data.category === cat),
-  }))
-  .filter((group) => group.items.length > 0);
+const CATEGORY_LABELS: Record<(typeof CATEGORY_ORDER)[number], string> = {
+  frontend: t["skills.category.frontend"],
+  backend: t["skills.category.backend"],
+  database: t["skills.category.database"],
+  "data-ai": t["skills.category.data-ai"],
+  tools: t["skills.category.tools"],
+};
+
+// رنگ رسمی برند هر تکنولوژی (بر اساس اسلاگ simple-icons که توی content گذاشتیم)
+const BRAND_COLORS: Record<string, string> = {
+  nuxtdotjs: "#00DC82",
+  vuedotjs: "#4FC08D",
+  typescript: "#3178C6",
+  javascript: "#F7DF1E",
+  tailwindcss: "#06B6D4",
+  html5: "#E34F26",
+  css3: "#1572B6",
+  svelte: "#FF3E00",
+  nodedotjs: "#339933",
+  nestjs: "#E0234E",
+  swagger: "#85EA2D",
+  graphql: "#E10098",
+  php: "#777BB4",
+  postgresql: "#4169E1",
+  mongodb: "#47A248",
+  python: "#3776AB",
+  pandas: "#150458",
+  scikitlearn: "#F7931E",
+  openai: "#10A37F",
+  git: "#F05032",
+  github: "#181717",
+  githubactions: "#2088FF",
+  docker: "#2496ED",
+  figma: "#F24E1E",
+  jest: "#C21325",
+  wordpress: "#21759B",
+  woocommerce: "#96588A",
+};
+
+function brandColor(icon: string) {
+  return BRAND_COLORS[icon] ?? "#64748B"; // پیش‌فرض: text-muted، برای آیکون‌های ناشناس
+}
+
+function starLevel(level: number | undefined) {
+  const l = level ?? 0;
+  if (l >= 90) return 3;
+  if (l >= 70) return 2;
+  return 1;
+}
+
+function levelLabel(stars: number) {
+  if (stars === 3) return t["skills.legend.expert"];
+  if (stars === 2) return t["skills.legend.proficient"];
+  return t["skills.legend.beginner"];
+}
+
+const groups = CATEGORY_ORDER.map((cat) => ({
+  key: cat,
+  label: CATEGORY_LABELS[cat],
+  items: allSkills
+    .filter((s) => s.data.category === cat)
+    .sort((a, b) => (b.data.level ?? 0) - (a.data.level ?? 0)),
+})).filter((g) => g.items.length > 0);
 ---
 
-<section id="skills" class="bg-white py-(--spacing-section)">
+<section id="skills" class="reveal bg-white py-24 reveal">
   <div class="mx-auto max-w-6xl px-4">
-    <h2 class="text-center font-heading text-3xl font-bold text-primary md:text-4xl">
-      {t("section.skills")}
-    </h2>
+    <!-- هدر سکشن -->
+    <div class="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div>
+        <h2 class="flex items-center gap-2 text-3xl font-bold text-text-primary md:text-4xl">
+          <span class="text-accent">/</span>
+          {t["section.skills"]}
+        </h2>
+        <p class="mt-3 max-w-xl text-sm text-text-muted md:text-base">
+          {t["section.skills.subtitle"]}
+        </p>
+      </div>
 
-    <div class="mt-12 grid gap-10 md:grid-cols-2">
-      {grouped.map((group) => (
+      <!-- راهنمای ستاره‌ها -->
+      <div class="flex flex-wrap gap-2">
+        {[3, 2, 1].map((stars) => (
+          <span class="flex items-center gap-1.5 rounded-full bg-neutral-bg px-3 py-1.5">
+            <span class="flex gap-0.5">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <svg
+                  viewBox="0 0 20 20"
+                  class={`h-3 w-3 ${i < stars ? "fill-accent" : "fill-slate-300"}`}
+                >
+                  <path d="M10 1.2l2.7 5.7 6.2.6-4.6 4.1 1.3 6.1-5.6-3.3-5.6 3.3 1.3-6.1-4.6-4.1 6.2-.6L10 1.2z" />
+                </svg>
+              ))}
+            </span>
+            <span class="text-[11px] font-medium uppercase tracking-wide text-text-muted">
+              {levelLabel(stars)}
+            </span>
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- گروه‌های دسته‌بندی -->
+    <div class="space-y-10">
+      {groups.map((group) => (
         <div>
-          <h3 class="mb-4 font-heading text-lg font-semibold text-primary">
+          <h3 class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
             {group.label}
           </h3>
-
-          <div class="space-y-5">
-            {group.items.map((skill) => (
-              <div>
-                <div class="mb-1.5 flex items-center justify-between gap-2">
-                  <div class="flex items-center gap-2">
-                    <Icon name={`simple-icons:${skill.data.icon}`} class="h-4 w-4 text-accent" />
-                    <span class="text-sm font-medium text-text-primary">
-                      {skill.data.name}
+          <div class="reveal-stagger flex flex-wrap gap-3">
+            {group.items.map((skill) => {
+              const stars = starLevel(skill.data.level);
+              const color = brandColor(skill.data.icon);
+              return (
+                <div class="flex min-w-[168px] items-center gap-3 rounded-2xl border border-slate-200 bg-neutral-bg px-4 py-3 transition-colors hover:border-accent/40 hover:bg-white hover:shadow-sm">
+                  <span
+                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+                    style={`background-color: ${color}1A;`}
+                  >
+                    <Icon
+                      name={`simple-icons:${skill.data.icon}`}
+                      class="h-5 w-5"
+                      style={`color: ${color};`}
+                    />
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <p class="truncate text-sm font-medium text-text-primary">{skill.data.name}</p>
+                    <span class="mt-0.5 flex gap-0.5">
+                      {Array.from({ length: 3 }).map((_, i) => (
+                        <svg
+                          viewBox="0 0 20 20"
+                          class={`h-2.5 w-2.5 ${i < stars ? "fill-accent" : "fill-slate-300"}`}
+                        >
+                          <path d="M10 1.2l2.7 5.7 6.2.6-4.6 4.1 1.3 6.1-5.6-3.3-5.6 3.3 1.3-6.1-4.6-4.1 6.2-.6L10 1.2z" />
+                        </svg>
+                      ))}
                     </span>
                   </div>
-                  {skill.data.level && (
-                    <span class="text-xs text-text-muted">{skill.data.level}%</span>
-                  )}
                 </div>
-
-                <div class="h-2 w-full overflow-hidden rounded-(--radius-pill) bg-chip">
-                  <div
-                    class="h-full rounded-(--radius-pill) bg-accent"
-                    style={`width: ${skill.data.level ?? 0}%`}
-                  >
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       ))}

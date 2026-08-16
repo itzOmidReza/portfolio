@@ -6,7 +6,7 @@ import { getCollection } from "astro:content";
 const skills = await getCollection("skills");
 ---
 
-<section class="bg-white py-12">
+<section class="bg-white py-12 reveal">
   <div class="mx-auto max-w-6xl px-4">
     <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
       {skills.map((skill) => (

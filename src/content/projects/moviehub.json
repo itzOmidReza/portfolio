@@ -1,0 +1,21 @@
+{
+  "title": "MovieHub",
+  "description": {
+    "fa": "یک پلتفرم کشف فیلم مبتنی بر TMDB با قابلیت جست‌وجو، لیست تماشا، پیشنهادها و رابط کاربری واکنش‌گرا با رندر سمت سرور.",
+    "en": "A movie discovery platform powered by TMDB, featuring search, watchlists, recommendations, and responsive UI with server-side rendering."
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&q=80",
+    "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1600&q=80"
+  ],
+  "tech": [
+    "Nuxt.js",
+    "TypeScript",
+    "TMDB API",
+    "Tailwind CSS"
+  ],
+  "category": "Frontend",
+  "link": "https://github.com/itzOmidReza/moviehub",
+  "featured": false,
+  "order": 6
+}

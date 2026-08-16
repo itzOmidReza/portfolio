@@ -1,1 +1,6 @@
-{ "name": "Node.js", "icon": "nodedotjs", "level": 80, "category": "backend" }
+{
+  "name": "Node.js",
+  "icon": "nodedotjs",
+  "level": 95,
+  "category": "backend"
+}

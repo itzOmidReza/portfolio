@@ -1,6 +1,6 @@
 {
-  "name": "NestJS",
-  "icon": "nestjs",
+  "name": "REST API",
+  "icon": "swagger",
   "level": 95,
   "category": "backend"
 }

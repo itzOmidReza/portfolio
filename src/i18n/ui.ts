@@ -31,9 +31,6 @@ export const ui = {
     "footer.rights": "تمامی حقوق محفوظ است.",
     "section.about": "درباره من",
     "skills.category.frontend": "فرانت‌اند",
-    "skills.category.backend": "بک‌اند",
-    "skills.category.data-ai": "داده و هوش مصنوعی",
-    "skills.category.tools": "ابزارها",
     "projects.filter.all": "همه",
     "projects.cta.view": "مشاهده پروژه",
     "projects.featured": "ویژه",
@@ -45,7 +42,15 @@ export const ui = {
     "contact.error": "مشکلی پیش اومد. لطفاً دوباره تلاش کن.",
     "project.back": "بازگشت به پروژه‌ها",
     "projects.cta.details": "مشاهده جزئیات",
-
+    "skills.category.backend": "بک‌اند",
+    "skills.category.database": "پایگاه‌داده",
+    "skills.category.data-ai": "داده و هوش مصنوعی",
+    "skills.category.tools": "ابزارها",
+    "section.skills.subtitle":
+      "دسته‌بندی مهارت‌های فنی من بر اساس حوزه و سطح تسلط",
+    "skills.legend.expert": "خبره",
+    "skills.legend.proficient": "ماهر",
+    "skills.legend.beginner": "مبتدی",
   },
   en: {
     "nav.home": "Home",
@@ -86,5 +91,11 @@ export const ui = {
     "contact.error": "Something went wrong. Please try again.",
     "project.back": "Back to Projects",
     "projects.cta.details": "View Details",
+    "skills.category.database": "Database",
+    "section.skills.subtitle":
+      "Breakdown of my technical skills, categorized by domain and proficiency",
+    "skills.legend.expert": "Expert",
+    "skills.legend.proficient": "Proficient",
+    "skills.legend.beginner": "Beginner",
   },
 } as const;
