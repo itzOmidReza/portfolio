@@ -11,7 +11,7 @@ export const prerender = true;
 export async function getStaticPaths() {
   const projects = await getCollection(
     "projects",
-    ({ data }) => !data.title.startsWith("TODO_")
+    ({ data }) => !data.title.startsWith("TODO_"),
   );
 
   return projects.map((project) => ({

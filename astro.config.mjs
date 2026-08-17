@@ -7,10 +7,7 @@ import vercel from "@astrojs/vercel";
 
 export default defineConfig({
   site: "https://www.itzomidreza.ir",
-
-  // output رو عمداً "static" (پیش‌فرض) نگه داشتیم؛ فقط routeهایی مثل
-  output: "server",
-  // src/pages/api/contact.ts که خودشون prerender = false دارن on-demand رندر می‌شن
+  output: "server", // برای اینکه api/contact کار کنه لازمه بمونه
   adapter: vercel(),
 
   i18n: {
