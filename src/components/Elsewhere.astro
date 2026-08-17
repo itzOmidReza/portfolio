@@ -1,0 +1,40 @@
+---
+// src/components/Elsewhere.astro
+import { Icon } from "astro-icon/components";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { site } from "../i18n/site";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const links = site.socials.filter((s) => s.showElsewhere && s.url);
+---
+
+{
+  links.length > 0 && (
+    <section class="reveal py-16">
+      <div class="mx-auto max-w-6xl px-4">
+        <h2 class="text-center font-heading text-2xl font-bold text-primary md:text-3xl">
+          {t("section.elsewhere")}
+        </h2>
+
+        <div class="reveal-stagger mt-10 flex flex-wrap items-center justify-center gap-4">
+          {links.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-2.5 rounded-(--radius-pill) border border-chip bg-white px-5 py-2.5 text-sm font-medium text-text-primary shadow-sm transition-colors hover:border-accent hover:text-accent"
+            >
+              <Icon
+                name={link.icon}
+                class="h-5 w-5 text-text-muted transition-colors group-hover:text-accent"
+              />
+              {link.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
