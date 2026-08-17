@@ -1,6 +1,10 @@
 ---
 // src/components/Header.astro
-import { getLangFromUrl, useTranslations, useTranslatedPath } from "../i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 const lang = getLangFromUrl(Astro.url);
@@ -16,29 +20,42 @@ const navItems = [
 ] as const;
 
 const otherLang = lang === "en" ? "fa" : "en";
-const switchHref = getRelativeLocaleUrl(otherLang, "/");
+
+// حفظ صفحه‌ی فعلی موقع سوییچ زبان (نه صرفاً پرش به هوم‌پیج).
+// چون فقط "fa" پیشوند "/fa/" داره (prefixDefaultLocale: false)، کافیه
+// همون پیشوند رو (اگه وجود داشت) از مسیر فعلی جدا کنیم تا به مسیر
+// «بدون زبان» برسیم، بعد با locale مقصد دوباره بسازیمش.
+const currentPath = Astro.url.pathname;
+const pathWithoutLocale =
+  lang === "fa" ? currentPath.replace(/^\/fa(\/|$)/, "/") : currentPath;
+const switchHref = getRelativeLocaleUrl(otherLang, pathWithoutLocale || "/");
+
 const homeHref = getRelativeLocaleUrl(lang, "/");
 ---
 
 <header class="sticky top-0 z-50 bg-bg/80 backdrop-blur-sm enter-fade">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-    <a href={homeHref} class="font-heading text-lg font-bold text-primary">
-      OmidReza
+    <a
+      href={homeHref}
+      class="flex items-center gap-2 font-heading text-lg font-bold text-primary"
+    >
+      <img src="/logo.png" alt="OmidReza" class="h-8 w-auto" />
     </a>
 
     <nav class="hidden gap-6 md:flex">
-      {navItems.map((item) => (
-        <a
-          href={`${homeHref}${item.anchor}`}
-          class="text-sm text-text-muted transition-colors hover:text-accent"
-        >
-          {t(item.key)}
-        </a>
-      ))}
+      {
+        navItems.map((item) => (
+          <a
+            href={`${homeHref}${item.anchor}`}
+            class="text-sm text-text-muted transition-colors hover:text-accent"
+          >
+            {t(item.key)}
+          </a>
+        ))
+      }
     </nav>
 
     <a
-    
       href={switchHref}
       class="rounded-(--radius-pill) border border-accent px-4 py-1.5 text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-white"
     >
