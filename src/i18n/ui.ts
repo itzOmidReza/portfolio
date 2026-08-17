@@ -54,6 +54,18 @@ export const ui = {
     "skills.legend.proficient": "ماهر",
     "skills.legend.beginner": "مبتدی",
     "section.elsewhere": "من رو این‌جاها هم پیدا کن",
+    "error.404.title": "صفحه پیدا نشد",
+    "error.404.heading": "این صفحه وجود نداره",
+    "error.404.body":
+      "لینکی که دنبالش بودی جابه‌جا شده یا حذف شده. برگرد به صفحه‌ی اصلی.",
+    "error.404.cta": "بازگشت به خانه",
+    "error.500.title": "خطای سرور",
+    "error.500.heading": "یه مشکلی پیش اومد",
+    "error.500.body":
+      "مشکل از سمت ماست، نه شما. لطفاً چند لحظه دیگه دوباره امتحان کن.",
+    "error.500.cta": "بازگشت به خانه",
+    "error.404.description": "این صفحه پیدا نشد. به صفحه‌ی اصلی امیدرضا شهبازی برگردید.",
+
   },
   en: {
     "nav.home": "Home",
@@ -103,5 +115,16 @@ export const ui = {
     "skills.legend.proficient": "Proficient",
     "skills.legend.beginner": "Beginner",
     "section.elsewhere": "Find Me Elsewhere",
+    "error.404.title": "Page Not Found",
+    "error.404.heading": "This page doesn't exist",
+    "error.404.body":
+      "The link you followed may be broken, or the page may have been removed. Let's get you back on track.",
+    "error.404.cta": "Back to Home",
+    "error.500.title": "Server Error",
+    "error.500.heading": "Something went wrong",
+    "error.500.body":
+      "This is on our end, not yours. Please try again in a moment.",
+    "error.500.cta": "Back to Home",
+    "error.404.description": "This page could not be found. Return to OmidReza Shahbazi's homepage.",
   },
 } as const;

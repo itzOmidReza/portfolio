@@ -12,9 +12,11 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, noindex = false } = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
 const dir = lang === "fa" ? "rtl" : "ltr";
 ---
@@ -37,6 +39,7 @@ const dir = lang === "fa" ? "rtl" : "ltr";
     <meta name="theme-color" content="#0A1F44" />
 
     <Seo title={title} description={description} ogImage={ogImage} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
   </head>
   <body class:list={[lang === "fa" ? "font-vazir" : "font-inter"]}>
     <Header />
