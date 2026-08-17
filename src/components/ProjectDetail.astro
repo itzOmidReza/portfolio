@@ -16,11 +16,11 @@ const { title, description, images, tech, category, link } = project.data;
 const backHref = `${getRelativeLocaleUrl(lang, "/")}#projects`;
 ---
 
-<section class="py-(--spacing-section) reveal">
+<section class="py-(--spacing-section)">
   <div class="mx-auto max-w-4xl px-4">
     <a
       href={backHref}
-      class="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-primary"
+      class="enter-fade inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-primary"
     >
       <svg
         class="h-4 w-4 rtl:rotate-180"
@@ -36,21 +36,21 @@ const backHref = `${getRelativeLocaleUrl(lang, "/")}#projects`;
       {t("project.back")}
     </a>
 
-    <span class="mt-6 inline-block rounded-(--radius-pill) bg-chip px-3 py-1 text-xs font-medium text-text-primary">
+    <span class="enter-up enter-delay-1 mt-6 inline-block rounded-(--radius-pill) bg-chip px-3 py-1 text-xs font-medium text-text-primary">
       {category}
     </span>
 
-    <h1 class="mt-3 font-heading text-3xl font-bold text-primary md:text-4xl">
+    <h1 class="enter-up enter-delay-2 mt-3 font-heading text-3xl font-bold text-primary md:text-4xl">
       {title}
     </h1>
 
-    <div class="mt-8 overflow-hidden rounded-(--radius-card) bg-dark">
+    <div class="enter-scale enter-delay-3 mt-8 overflow-hidden rounded-(--radius-card) bg-dark">
       <img src={images[0]} alt={title} class="aspect-video w-full object-cover" />
     </div>
 
     {
       images.length > 1 && (
-        <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <div class="reveal-stagger mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
           {images.slice(1).map((img) => (
             <div class="overflow-hidden rounded-(--radius-card) bg-dark">
               <img src={img} alt={title} class="aspect-video w-full object-cover" />
@@ -60,11 +60,11 @@ const backHref = `${getRelativeLocaleUrl(lang, "/")}#projects`;
       )
     }
 
-    <p class="mt-8 text-lg leading-relaxed text-text-muted">
+    <p class="reveal mt-8 text-lg leading-relaxed text-text-muted">
       {description[lang]}
     </p>
 
-    <div class="mt-6 flex flex-wrap gap-2">
+    <div class="reveal-stagger mt-6 flex flex-wrap gap-2">
       {
         tech.map((item) => (
           <span class="rounded-(--radius-pill) bg-chip px-3 py-1 text-xs font-medium text-text-primary">
@@ -78,7 +78,7 @@ const backHref = `${getRelativeLocaleUrl(lang, "/")}#projects`;
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      class="mt-8 inline-flex items-center gap-2 rounded-(--radius-pill) bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary"
+      class="reveal mt-8 inline-flex items-center gap-2 rounded-(--radius-pill) bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary"
     >
       {t("projects.cta.view")}
       <svg

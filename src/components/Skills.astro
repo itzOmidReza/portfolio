@@ -75,11 +75,11 @@ const groups = CATEGORY_ORDER.map((cat) => ({
 })).filter((g) => g.items.length > 0);
 ---
 
-<section id="skills" class="reveal bg-white py-24 reveal">
+<section id="skills" class="reveal bg-white py-24">
   <div class="mx-auto max-w-6xl px-4">
     <!-- هدر سکشن -->
     <div class="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-      <div>
+      <div class="reveal-side">
         <h2 class="flex items-center gap-2 text-3xl font-bold text-text-primary md:text-4xl">
           <span class="text-accent">/</span>
           {t["section.skills"]}
@@ -90,7 +90,7 @@ const groups = CATEGORY_ORDER.map((cat) => ({
       </div>
 
       <!-- راهنمای ستاره‌ها -->
-      <div class="flex flex-wrap gap-2">
+      <div class="reveal-side-end flex flex-wrap gap-2">
         {[3, 2, 1].map((stars) => (
           <span class="flex items-center gap-1.5 rounded-full bg-neutral-bg px-3 py-1.5">
             <span class="flex gap-0.5">
@@ -114,7 +114,7 @@ const groups = CATEGORY_ORDER.map((cat) => ({
     <!-- گروه‌های دسته‌بندی -->
     <div class="space-y-10">
       {groups.map((group) => (
-        <div>
+        <div class="reveal">
           <h3 class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
             {group.label}
           </h3>

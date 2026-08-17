@@ -29,8 +29,8 @@ const typeLabels: Record<(typeof experiences)[number]["data"]["type"], string> =
       <div class="absolute top-1 bottom-1 start-[15px] w-px bg-chip"></div>
 
       {
-        experiences.map((exp) => (
-          <div class="relative">
+        experiences.map((exp, i) => (
+          <div class="relative reveal-side" style={`--reveal-delay: ${Math.min(i, 4) * 90}ms`}>
             <span class="absolute start-[-32px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-accent ring-4 ring-bg" />
 
             <div class="rounded-(--radius-card) bg-white p-6 shadow-sm">

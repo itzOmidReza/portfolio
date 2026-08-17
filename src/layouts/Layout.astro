@@ -36,7 +36,7 @@ const dir = lang === "fa" ? "rtl" : "ltr";
 <script>
   function initScrollReveal() {
     const targets = document.querySelectorAll(
-      ".reveal, .reveal-scale, .reveal-side, .reveal-stagger"
+      ".reveal, .reveal-scale, .reveal-side, .reveal-side-end, .reveal-stagger"
     );
     if (!targets.length) return;
 
@@ -59,12 +59,24 @@ const dir = lang === "fa" ? "rtl" : "ltr";
         }
       },
       {
-        threshold: 0.15, // وقتی ۱۵٪ المان دیده شد
-        rootMargin: "0px 0px -8% 0px",
+        threshold: 0.05, // زودتر تریگر بشه تا کل مسیر transition دیده بشه
+        rootMargin: "0px 0px -15% 0px",
       }
     );
 
-    targets.forEach((el) => observer.observe(el));
+    // نکته‌ی مهم: اگه observer رو همون لحظه‌ی initScrollReveal() وصل کنیم،
+    // برای المان‌هایی که از همون اول لود صفحه توی viewport هستن (مثل
+    // StatsBar یا بالای About)، مرورگر فرصت نمی‌کنه state اولیه‌ی
+    // opacity:0 رو یه فریم پینت کنه؛ در نتیجه IntersectionObserver فوراً
+    // فایر میشه، کلاس is-visible همون لحظه اضافه میشه و transition
+    // کامل skip میشه (پرش ناگهانی به‌جای fade نرم).
+    // با دو تا requestAnimationFrame پشت‌سرهم مطمئن میشیم مرورگر حالت
+    // اولیه رو واقعاً رندر کرده، بعد observer رو وصل می‌کنیم.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        targets.forEach((el) => observer.observe(el));
+      });
+    });
   }
 
   // اجرای اولیه
