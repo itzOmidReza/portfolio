@@ -2,12 +2,14 @@
 // src/components/StatsBar.astro
 import { getCollection } from "astro:content";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { site } from "../i18n/site";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const projects = await getCollection("projects");
 const experience = await getCollection("experience");
+const skills = await getCollection("skills");
 
 // قدیمی‌ترین startDate بین تجربه‌ها = نقطه‌ی شروع مسیر کاری
 const earliestStart = experience.reduce((earliest, exp) => {
@@ -22,13 +24,15 @@ const yearsExperience = Math.max(
 const stats = [
   { value: `${yearsExperience}+`, label: t("stats.experience") },
   { value: `${projects.length}+`, label: t("stats.projects") },
+  { value: `${skills.length}+`, label: t("stats.technologies") },
+  { value: `${site.happyClients}+`, label: t("stats.roles") },
 ];
 ---
 
 <section class="border-y border-chip bg-white reveal">
-  <div class="reveal-stagger mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-10 md:grid-cols-4">
+  <div class="reveal-stagger mx-auto grid max-w-6xl grid-cols-2 gap-x-4 gap-y-8 px-4 py-10 md:grid-cols-4 md:divide-x md:divide-chip md:rtl:divide-x-reverse">
     {stats.map((stat) => (
-      <div class="text-center">
+      <div class="text-center md:px-4">
         <p class="font-heading text-3xl font-bold text-primary md:text-4xl">
           {stat.value}
         </p>

@@ -54,6 +54,11 @@ html[dir="rtl"] body {
   to   { opacity: 1; transform: scale(1); }
 }
 
+@keyframes iconIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.85); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 /* --- 1) انیمیشن ورود در لحظه‌ی لود صفحه (Hero و هدر) --- */
 .enter-up {
   animation: fadeUp 1.3s cubic-bezier(0.33, 1, 0.68, 1) both;
@@ -63,6 +68,14 @@ html[dir="rtl"] body {
 }
 .enter-scale {
   animation: scaleIn 1.2s cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+/* برای ردیف آیکون‌های تکنولوژی (TechStackStrip): چون این بخش معمولاً
+   همون لحظه‌ی لود صفحه توی دیدرسه (بدون نیاز به اسکرول)، به‌جای سیستم
+   reveal اسکرولی از یه انیمیشن لود مستقل استفاده می‌کنیم که خودش پخش
+   میشه. تاخیر هر آیکون به‌صورت inline (بر اساس ترتیبش) ست میشه، نه با
+   کلاس‌های enter-delay-1..5 (که برای تعداد کم المان طراحی شدن). */
+.enter-icon {
+  animation: iconIn 0.65s cubic-bezier(0.33, 1, 0.68, 1) both;
 }
 /* استگر: روی چند تا المان پشت‌سرهم با تاخیر متفاوت */
 .enter-delay-1 { animation-delay: 0.18s; }
@@ -138,7 +151,7 @@ html[dir="rtl"] body {
 
 /* --- احترام به کاربرهایی که انیمیشن کم می‌خوان --- */
 @media (prefers-reduced-motion: reduce) {
-  .enter-up, .enter-fade, .enter-scale,
+  .enter-up, .enter-fade, .enter-scale, .enter-icon,
   .reveal, .reveal-scale, .reveal-side, .reveal-side-end,
   .reveal-stagger > * {
     animation: none !important;

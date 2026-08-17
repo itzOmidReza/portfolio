@@ -44,7 +44,7 @@ const backHref = `${getRelativeLocaleUrl(lang, "/")}#projects`;
       {title}
     </h1>
 
-    <div class="enter-scale enter-delay-3 mt-8 overflow-hidden rounded-(--radius-card) bg-dark">
+    <div class="enter-scale enter-delay-3 mt-8 overflow-hidden rounded-(--radius-card) bg-bg">
       <img src={images[0]} alt={title} class="aspect-video w-full object-cover" />
     </div>
 
@@ -52,7 +52,7 @@ const backHref = `${getRelativeLocaleUrl(lang, "/")}#projects`;
       images.length > 1 && (
         <div class="reveal-stagger mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
           {images.slice(1).map((img) => (
-            <div class="overflow-hidden rounded-(--radius-card) bg-dark">
+            <div class="overflow-hidden rounded-(--radius-card) bg-bg">
               <img src={img} alt={title} class="aspect-video w-full object-cover" />
             </div>
           ))}
