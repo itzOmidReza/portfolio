@@ -53,6 +53,7 @@ export const ui = {
     "skills.legend.expert": "خبره",
     "skills.legend.proficient": "ماهر",
     "skills.legend.beginner": "مبتدی",
+    "section.elsewhere": "من رو این‌جاها هم پیدا کن",
   },
   en: {
     "nav.home": "Home",
@@ -101,5 +102,6 @@ export const ui = {
     "skills.legend.expert": "Expert",
     "skills.legend.proficient": "Proficient",
     "skills.legend.beginner": "Beginner",
+    "section.elsewhere": "Find Me Elsewhere",
   },
 } as const;
