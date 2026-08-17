@@ -4,13 +4,14 @@ import { Image } from "astro:assets";
 import heroImage from "../assets/hero.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { site } from "../i18n/site";
+import HeroDecoration from "./HeroDecoration.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section id="home" class="relative overflow-hidden py-(--spacing-section)">
-  <!-- دکوراسیون نقطه‌چین پس‌زمینه -->
+<section id="home" class="relative overflow-hidden py-8 lg:py-(--spacing-section)">
+  <!-- دکوراسیون نقطه‌چین پس‌زمینه‌ی کلی سکشن -->
   <svg
     class="pointer-events-none absolute -top-10 end-0 h-64 w-64 text-accent-light/40 enter-fade enter-delay-3"
     viewBox="0 0 200 200"
@@ -33,20 +34,19 @@ const t = useTranslations(lang);
       </span>
 
       <h1 class="mt-6 font-heading text-4xl font-bold text-primary md:text-5xl enter-up">
-        {site.name}
+        {site.name[lang]}
       </h1>
       <p class="mt-2 text-xl text-accent enter-up enter-delay-1">{site.role[lang]}</p>
       <p class="mt-4 max-w-md text-text-muted enter-up enter-delay-1">{site.tagline[lang]}</p>
 
       <div class="mt-8 flex flex-wrap gap-4 enter-up enter-delay-2">
         <a
-        
           href="#projects"
           class="rounded-(--radius-pill) bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary"
         >
           {t("hero.cta.work")}
         </a>
-        
+
         <a
           href="/OmidRezaCV.pdf"
           class="rounded-(--radius-pill) border border-primary px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-white"
@@ -58,6 +58,8 @@ const t = useTranslations(lang);
 
     <!-- عکس در بلاب -->
     <div class="relative mx-auto aspect-square w-full max-w-sm">
+      <HeroDecoration />
+
       <div
         class="absolute inset-0 rounded-[40%_60%_60%_40%/60%_40%_60%_40%] bg-gradient-to-br from-accent to-accent-light blur-2xl opacity-30"
       >
@@ -67,7 +69,7 @@ const t = useTranslations(lang);
       >
         <Image
           src={heroImage}
-          alt={site.name}
+          alt={site.name[lang]}
           width={480}
           height={480}
           class="h-full w-full object-cover enter-scale enter-delay-1"

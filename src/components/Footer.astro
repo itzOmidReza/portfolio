@@ -2,12 +2,15 @@
 // src/components/Footer.astro
 import { Icon } from "astro-icon/components";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { site } from "../i18n/site";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const year = new Date().getFullYear();
+
+const homeHref = getRelativeLocaleUrl(lang, "/");
 
 const navItems = [
   { key: "nav.home", anchor: "#home" },
@@ -18,26 +21,28 @@ const navItems = [
   { key: "nav.contact", anchor: "#contact" },
 ] as const;
 
-const socials = [
-  { icon: "simple-icons:github", href: site.contact.github, label: "GitHub" },
-  { icon: "simple-icons:linkedin", href: site.contact.linkedin, label: "LinkedIn" },
-  { icon: "simple-icons:telegram", href: site.contact.telegram, label: "Telegram" },
-] as const;
+const socials = site.socials.filter((s) => s.showInContact && s.url);
 ---
 
 <footer class="bg-dark py-12 text-white">
   <div class="mx-auto max-w-6xl px-4">
-    <div class="flex flex-col items-center gap-6 md:flex-row md:items-start md:justify-between">
+    <div
+      class="flex flex-col items-center gap-6 md:flex-row md:items-start md:justify-between"
+    >
       <div class="text-center md:text-start">
-        <p class="font-heading text-lg font-bold">{site.name}</p>
+        <img
+          src="/logo-white.png"
+          alt={site.name[lang]}
+          class="mx-auto h-8 w-auto md:mx-0"
+        />
         <p class="mt-1 text-sm text-white/60">{site.role[lang]}</p>
       </div>
 
       <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
         {
-          navItems.map((item) => (
+          navItems.map((item: (typeof navItems)[number]) => (
             <a
-              href={item.anchor}
+              href={`${homeHref}${item.anchor}`}
               class="text-sm text-white/60 transition-colors hover:text-accent-light"
             >
               {t(item.key)}
@@ -48,23 +53,49 @@ const socials = [
 
       <div class="flex items-center gap-4">
         {
-          socials.map((social) => (
-            <a
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.label}
-              class="text-white/60 transition-colors hover:text-accent-light"
-            >
-              <Icon name={social.icon} class="h-5 w-5" />
-            </a>
-          ))
+          socials.map((social: (typeof socials)[number]) =>
+            social.icon ? (
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                class="text-white/60 transition-colors hover:text-accent-light"
+              >
+                <Icon name={social.icon} class="h-5 w-5" />
+              </a>
+            ) : (
+              <a
+                href={social.url}
+                aria-label={social.name}
+                class="text-white/60 transition-colors hover:text-accent-light"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  class="h-5 w-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 8l9 6 9-6M3 6h18v12H3V6z"
+                  />
+                </svg>
+              </a>
+            ),
+          )
         }
       </div>
     </div>
 
-    <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40">
-      &copy; {year} {site.name}. {t("footer.rights")}
+    <div
+      class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40"
+    >
+      &copy; {year}
+      {site.name[lang]}. {t("footer.rights")}
     </div>
   </div>
 </footer>
