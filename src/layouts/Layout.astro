@@ -2,6 +2,7 @@
 import "@fontsource-variable/vazirmatn";
 import "@fontsource-variable/inter";
 import Header from "../components/Header.astro";
+import Seo from "../components/Seo.astro";
 import "../styles/global.css";
 
 import { getLangFromUrl } from "../i18n/utils";
@@ -9,9 +10,10 @@ import { getLangFromUrl } from "../i18n/utils";
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const dir = lang === "fa" ? "rtl" : "ltr";
 ---
@@ -21,68 +23,99 @@ const dir = lang === "fa" ? "rtl" : "ltr";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description ?? ""} />
-    <title>{title}</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link rel="icon" href="/icons/favicon.ico" sizes="32x32" />
+    <link
+      rel="icon"
+      href="/icons/favicon-96x96.png"
+      sizes="96x96"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0A1F44" />
+
+    <Seo title={title} description={description} ogImage={ogImage} />
   </head>
   <body class:list={[lang === "fa" ? "font-vazir" : "font-inter"]}>
-     <Header />
+    <Header />
     <slot />
-    <!--
-  این بلوک رو داخل src/layouts/Layout.astro، درست قبل از بسته‌شدن </body>
-  اضافه کن (اگه astro:transitions/ClientRouter داری، این اسکریپت با
-  event "astro:page-load" هم دوباره اجرا می‌شه که بعد از ناوبری کار کنه).
--->
-<script>
-  function initScrollReveal() {
-    const targets = document.querySelectorAll(
-      ".reveal, .reveal-scale, .reveal-side, .reveal-side-end, .reveal-stagger"
-    );
-    if (!targets.length) return;
 
-    // اگه کاربر انیمیشن کم می‌خواد، مستقیم همه رو نشون بده
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) {
-      targets.forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
+    <script>
+      function initScrollReveal() {
+        const targets = document.querySelectorAll(
+          ".reveal, .reveal-scale, .reveal-side, .reveal-side-end, .reveal-stagger",
+        );
+        if (!targets.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target); // فقط یه بار انیمیت بشه
-          }
+        const prefersReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        if (prefersReduced) {
+          targets.forEach((el) => el.classList.add("is-visible"));
+          return;
         }
-      },
-      {
-        threshold: 0.05, // زودتر تریگر بشه تا کل مسیر transition دیده بشه
-        rootMargin: "0px 0px -15% 0px",
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          {
+            threshold: 0.05,
+            rootMargin: "0px 0px -15% 0px",
+          },
+        );
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            targets.forEach((el) => observer.observe(el));
+          });
+        });
       }
-    );
 
-    // نکته‌ی مهم: اگه observer رو همون لحظه‌ی initScrollReveal() وصل کنیم،
-    // برای المان‌هایی که از همون اول لود صفحه توی viewport هستن (مثل
-    // StatsBar یا بالای About)، مرورگر فرصت نمی‌کنه state اولیه‌ی
-    // opacity:0 رو یه فریم پینت کنه؛ در نتیجه IntersectionObserver فوراً
-    // فایر میشه، کلاس is-visible همون لحظه اضافه میشه و transition
-    // کامل skip میشه (پرش ناگهانی به‌جای fade نرم).
-    // با دو تا requestAnimationFrame پشت‌سرهم مطمئن میشیم مرورگر حالت
-    // اولیه رو واقعاً رندر کرده، بعد observer رو وصل می‌کنیم.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        targets.forEach((el) => observer.observe(el));
-      });
-    });
-  }
+      initScrollReveal();
+      document.addEventListener("astro:page-load", initScrollReveal);
+    </script>
 
-  // اجرای اولیه
-  initScrollReveal();
-  // اگه از View Transitions آسترو استفاده می‌کنی، بعد از هر ناوبری دوباره اجرا بشه
-  document.addEventListener("astro:page-load", initScrollReveal);
-</script>
+    <script>
+      function initSmoothAnchorScroll() {
+        document.addEventListener("click", (e) => {
+          const link = (e.target as HTMLElement)?.closest("a[href*='#']");
+          if (!link) return;
+
+          const url = new URL(link.getAttribute("href")!, window.location.href);
+          const samePage =
+            url.pathname === window.location.pathname &&
+            url.search === window.location.search;
+
+          if (!samePage || !url.hash) return;
+
+          const target = document.querySelector(url.hash);
+          if (!target) return;
+
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.pushState(null, "", url.hash);
+        });
+
+        if (window.location.hash) {
+          const hash = window.location.hash;
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              const target = document.querySelector(hash);
+              target?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 100);
+          });
+        }
+      }
+
+      initSmoothAnchorScroll();
+      document.addEventListener("astro:page-load", initSmoothAnchorScroll);
+    </script>
   </body>
 </html>
