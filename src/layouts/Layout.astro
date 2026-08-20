@@ -5,7 +5,7 @@ import Header from "../components/Header.astro";
 import Seo from "../components/Seo.astro";
 import Analytics from "@vercel/analytics/astro";
 import "../styles/global.css";
-
+import SpeedInsights from "@vercel/speed-insights/astro"
 import { getLangFromUrl } from "../i18n/utils";
 
 interface Props {
@@ -45,6 +45,7 @@ const dir = lang === "fa" ? "rtl" : "ltr";
     <Header />
     <slot />
     <Analytics />
+    <SpeedInsights/>
     <script>
       function initScrollReveal() {
         const targets = document.querySelectorAll(
